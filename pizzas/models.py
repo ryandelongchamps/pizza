@@ -7,9 +7,10 @@ class Pizza(models.Model):
     name = models.CharField(max_length=200)
     date = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ImageField(null=True, blank=True, upload_to="images/")
 
     def __str__(self):
-        return self.text
+        return self.name
 
 class Topping(models.Model):
     pizza = models.ForeignKey(Pizza, on_delete=models.CASCADE)
@@ -17,7 +18,7 @@ class Topping(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text
+        return self.name
 
 class Comment(models.Model):
     pizza = models.ForeignKey(Pizza, on_delete=models.CASCADE)
@@ -25,4 +26,4 @@ class Comment(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text
+        return self.name

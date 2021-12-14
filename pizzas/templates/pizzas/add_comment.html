@@ -1,0 +1,15 @@
+{% extends "pizzas/base.html" %}
+
+{% block content %}
+
+<p> Add a new comment:</p>
+
+<form action= "{% url 'pizzas:add_comment' pizza.id %}" method = 'post'>
+    {% csrf_token %}
+    {{form.as_p}}
+    
+    <button name = "submit">Add comment</button>
+
+</form>
+
+{% endblock content %}

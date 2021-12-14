@@ -1,0 +1,46 @@
+{% extends "pizzas/base.html" %}
+
+{% block content %}
+<h1>Type: {{ pizza.name }}</h1>
+
+<p>
+    {% if pizza.image %}
+        <img class="img-responsive" src="{{ pizza.image.url }}">
+    {% endif %}
+</p>
+<dt>Toppings:</dt>
+<ul>
+    {% for t in topping %}
+    <li>
+    <dd>{{ t.name|linebreaks }}</dd>
+    </li>
+        <a href="{% url 'pizzas:edit_topping' pizza.id %}"> Edit toppings</a>
+        
+    </div>
+        
+        {% empty %}
+            <dd>There are no toppings for this Pizza.</dd>
+    {% endfor %}
+
+<p>
+        <a href ="{% url 'pizzas:new_topping' pizza.id %}">Add toppings</a>
+</p>
+<ul>
+
+<dt>Comments:</dt>
+    {% for c in comment %}
+        <li>
+        <dd><bold>{{ c.date_added|date:'M d, Y H:i' }}</bold></dd>
+        <dd>{{ c.name|linebreaks }}</dd>
+        </li>
+        
+        {% empty %}
+            <dd>There are no comments for this Pizza yet.</dd>
+
+    {% endfor %}
+
+</ul>
+<p>
+    <a href ="{% url 'pizzas:add_comment' pizza.id %}">Add a comment</a>
+</p>
+{% endblock content %}
